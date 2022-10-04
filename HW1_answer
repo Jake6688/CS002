@@ -1,0 +1,187 @@
+/// 10413663, Chi Chiu Pong
+/// 9/27/2022
+/// HW1, Problem 1
+
+
+
+#include <iostream>
+using namespace std;
+
+int nth; // memory location to save nth number in the sequence
+int nthfinder(int x);
+//Precondition: int x have been given a value
+//Postcondition: returns xth number in the sequence
+// 1, 1, 2, 1, 2, 3, 1, 2, 3, 4, 1, 2, 3, 4, 5, ......;
+
+ char y_n = 'y'; //globle more y/n sentinel value
+
+int main()
+{
+    // takes positive integer n
+    // prints nth number of a sequence
+    // use function
+    // 1, 1, 2, 1, 2, 3, 1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6;
+
+    while (y_n == 'y' || y_n == 'Y') // More y/n implementation
+    {
+        cout << "Enter n : "; // asking for n
+        cin >> nth; // saving n
+        cout << "Answer : " << nthfinder(nth) << endl; // callling function and print our answer
+        cout << "More (y/n): "; // More y/n implementation
+        cin >> y_n; // More y/n implementation
+    }
+}
+
+//answerer loop function takes int input and outputs int, input nth number's position and returns that number.
+int nthfinder(int x)
+{
+    int counter = 0;//set counter to track nth number printed
+
+    for (int i = 1; i <= x; i++)//loop for printing x amount of blocks of number, [],[],[],[]
+        {
+        for (int j = 1; j <= i; j++)//loop for increasing amount of number and increase in value in each block [1] [1,2] [1,2,3] [1,2,3,4]
+        {
+            counter++;//incrementing nth number counter
+            if (x == counter) // return answer when nth number counter is same as input
+                return j;//returns the number in the nth place
+        }
+    }
+}
+
+
+
+///10413663, Chi Chiu Pong
+///9/27/2022
+///HW1, Problem 2
+
+
+//#define NDEBUG
+#include <cassert>
+#include <iostream>
+using namespace std;
+
+int divisor_search(int);
+//Precondition: n is given int value larger than 10
+//Postcondition: outputs the perfect numbers less than n
+int total =0;//create total for counting number of answers
+char y_n = 'y';//globle more y/n sentinel value
+
+int main()
+{
+    do
+    {
+        int n;//input variable
+        cout << "Enter an integer greter than 10 : "; // output prompt to enter number
+        cin >> n;
+        cout << "------------------------------------" << endl;
+        cout << "Total : " << divisor_search(n);//call divisor_function and return answer
+        cout << endl << "More (y/n) : ";//More y/n implementation
+        cin >> y_n;//More y/n implementation
+        cout << endl;
+
+        total = 0;//reset total answer counter
+    } while (y_n == 'y' || y_n == 'Y');//More y/n implementation
+}
+//divisor_search loop function takes int input and outputs int, finds all the divisors below n
+int divisor_search(int n)
+{	assert(n>10);
+    for (int i = 4; i < n; i++) // loop for finding factor
+    {
+        int sum = 1;
+        for (int j = 2; j < i; j++) //from j=2 iterating until j<i
+                                    //finding factors for i except i itself and 1
+        {
+            if (i % j == 0) // if j is a factor of i, then add j to sum;
+            {
+                sum += j;
+            }
+        }
+        if (sum == i) // if sum of integer == i, then output answer and increment counter
+        {
+            cout << i << endl;
+            sum = 1;
+            total++;
+        }
+    }
+    cout << "------------------------------------" << endl;
+   return total; //return total number of answer
+}
+
+/// 10413663, Chi Chiu Pong
+/// 9/27/2022
+/// HW1, Problem 3
+
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+void top_triangle_printer(int n);
+//Precondition: n is given an odd int value
+//Postcondition: prints (n-1)/2 rows of inversed numbered pyramid,
+//numbers are incremented by 1,
+//with zeros filling the space.
+void bottom_triangle_printer(int n);
+//Precondition: n is given an odd int value
+//Postcondition: prints n/2 rows of regular numbered pyramid
+//numbers are incremented by 1,
+//with zeros filling the space.
+
+char y_n = 'y'; //globle more y/n sentinel value
+int num = 1; // printed number counter
+
+int main() {
+    do {
+        int n;
+        num = 1;
+        cout << "Enter positive odd int = ";
+        cin >> n;
+        top_triangle_printer(n);
+        bottom_triangle_printer(n);
+        cout << "Again? (y/n): "; // More y/n implementation
+        cin >> y_n;
+    } while (y_n == 'Y' || y_n == 'y'); // More y/n implementation
+}
+
+void top_triangle_printer(int n)
+{
+    for (int i = 1; i <= n / 2; i++) // print top half of the pattern
+    {
+        for (int k = i - 1; k > 0; k--) // top half left zeros
+        {
+            cout << setw(4) << "0";
+        }
+        for (int j = 1; j <= n - ((i - 1) * 2); j++) // top half numbers
+        {
+            cout << setw(4) << num;
+            num++;
+        }
+        for (int m = 1; m < i; m++) // top right zeros
+        {
+            cout << setw(4) << 0;
+        }
+        cout << endl;
+    }
+}
+
+void bottom_triangle_printer(int n)
+{
+    for (int i = ((n / 2) + 1);
+         i >= 1; i--)// print from n/2+1 row because odd rows, top is even rows and bottom is odd rows.
+    {
+        for (int k = 1; k < i; k++) // bottom left zeros
+        {
+            cout << setw(4) << "0";
+        }
+        for (int j = 0; j < n - ((i - 1) * 2); j++) // bottom numbers
+        {
+            cout << setw(4) << num;
+            num++;
+        }
+        for (int m = 1; m < i; m++) // bottom right zeros
+        {
+            cout << setw(4) << 0;
+        }
+        cout << endl;
+    }
+}
