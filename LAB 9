@@ -1,0 +1,44 @@
+//Lab9 
+//Question 3
+
+
+#include <iostream>
+using namespace std;
+
+
+int main()
+{
+    int n = 11;
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++) {
+            if (i == 1)
+            {
+                cout << "=";
+            }
+            else if (j == 1)
+            {
+                cout << "=";
+            }
+            else if (j == i && j != n)
+            {
+                cout << "*";
+            }
+            else if (j == n + 1 - i)
+            {
+                cout << "*";
+            }
+            else if (i == n)
+            {
+                cout << "=";
+            }
+            else if (j == n)
+            {
+                cout << "=";
+            }
+            else
+                cout << " ";
+        }
+        cout << endl;
+    }
