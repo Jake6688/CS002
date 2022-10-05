@@ -1,3 +1,7 @@
+/// 10413663, Chi Chiu Pong
+/// 10/4/2022
+/// LAB_10, Problem 1
+
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -24,12 +28,10 @@ void root_calculator(int,int,int);
 
 int main()
 {
-    do{
         input();
         quadratic_formulator(a, b, c);
         root_determinator(a, b, c);
         root_calculator(a,b,c);
-    }while(true);
 }
 
 void input()
@@ -44,7 +46,7 @@ void input()
 }
 void quadratic_formulator(int qa, int qb, int qc)
 {
-    cout << "The quadratic equation is " << qa << "x^2 + " << qb << "x + " << qc << " = 0 ";
+    cout << "The quadratic equation is " << qa << "x^2 + " << qb << "x + " << qc << " = 0 " << endl;
 }
 void root_determinator(int ra,int rb,int rc)
 {
@@ -64,6 +66,8 @@ void root_calculator(int rca,int rcb,int rcc)
 {
     int discriminate = pow(rcb,2)-4*rca*rcc;
     double root1,root2;
+    cout.precision(2);
+    cout.setf(ios::fixed);
     if ( discriminate > 0 ){
         root1 = ((-1 * rcb) + sqrt(discriminate))/(2*rca);
         root2 = ((-1 * rcb) - sqrt(discriminate))/(2*rca);
@@ -74,3 +78,7 @@ void root_calculator(int rca,int rcb,int rcc)
         cout << "It is " << root1;
     }
 }
+
+/// 10413663, Chi Chiu Pong
+/// 10/4/2022
+/// LAB_10, Problem 2
