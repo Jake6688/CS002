@@ -1,0 +1,76 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+///Write a program that find x in a given quadratic equation (a,b,c : integers).
+///You should use sqrt and pow functins
+
+int a,b,c;
+
+//input function
+void input();
+
+//quadratic equation formulator
+void quadratic_formulator(int, int, int);
+
+//b^2-4ac > 0, there are two solutions.
+//b^2-4ac = 0, only one solution.
+//b^2-4ac < 0, no real root.
+//Root Determinator
+void root_determinator(int,int,int);
+
+//Root calculator
+void root_calculator(int,int,int);
+
+int main()
+{
+    do{
+        input();
+        quadratic_formulator(a, b, c);
+        root_determinator(a, b, c);
+        root_calculator(a,b,c);
+    }while(true);
+}
+
+void input()
+{
+    cout << " Enter a : ";
+    cin >> a;
+    cout << " Enter b : ";
+    cin >> b;
+    cout << " Enter c : ";
+    cin >> c;
+    cout << endl;
+}
+void quadratic_formulator(int qa, int qb, int qc)
+{
+    cout << "The quadratic equation is " << qa << "x^2 + " << qb << "x + " << qc << " = 0 ";
+}
+void root_determinator(int ra,int rb,int rc)
+{
+    int discriminate = pow(b,2)-4*ra*rc ;
+    if ( discriminate > 0 ){
+        cout << "There are two solutions."<< endl;
+    }
+    else if( discriminate == 0 ){
+        cout << "There is only one solution." << endl;
+    }
+    else if( discriminate < 0 ) {
+        cout << "There is no real solution." << endl;
+    }
+}
+
+void root_calculator(int rca,int rcb,int rcc)
+{
+    int discriminate = pow(rcb,2)-4*rca*rcc;
+    double root1,root2;
+    if ( discriminate > 0 ){
+        root1 = ((-1 * rcb) + sqrt(discriminate))/(2*rca);
+        root2 = ((-1 * rcb) - sqrt(discriminate))/(2*rca);
+        cout << "They are " << root1 << " and " << root2 << ".";
+    }
+    else if( discriminate == 0 ){
+        root1 = (-1*rcb) / (2*rca);
+        cout << "It is " << root1;
+    }
+}
