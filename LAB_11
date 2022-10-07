@@ -1,0 +1,156 @@
+/*
+#include <iostream>
+
+using namespace std;
+
+void computeAverage(int,int,int,int);
+
+int history, science, math, english;
+
+int main()
+{
+	cout << "Enter your history score : ";
+	cin >> history;
+	cout << "Enter your science score : ";
+	cin >> science;
+	cout << "Enter your math score : ";
+	cin >> math;
+	cout << "Enter your english score : ";
+	cin >> english;
+
+	computeAverage(history,science,math,english);
+
+	return 0;
+}
+
+void computeAverage(int a, int b, int c, int d)
+{
+
+	int total;
+	double average;
+
+	total = history + science + math + english;
+	average = total / 4.0;
+
+	cout.setf(ios::fixed);
+	cout.setf(ios::showpoint);
+	cout.precision(2);
+
+	cout << "Average : " << average << endl;
+}
+*/
+
+/*
+#include <iostream>
+
+using namespace std;
+
+void sumAllDivisors(int);
+
+int num,sum=0;
+
+int main()
+{
+	cout << "Enter input number : ";
+	cin >> num;
+
+	cout << "The divisors of " << num << " are ";
+	sumAllDivisors(num);
+	cout << "The sum of all divisorrs of " << num << " is " << sum;
+}
+
+void sumAllDivisors(int)
+{
+	for (int i = 1; i < num; i++)
+	{
+		if (num % i == 0)
+		{
+			cout << i << ", ";
+			sum += i;
+		}
+	}
+	sum += num;
+	cout << num << "." << endl;
+}
+*/
+/*
+#include <iostream>
+using namespace std;
+
+void primefinder(int,int);
+
+int a, b, counter=0,primecounter = 0;
+
+int main()
+{
+	cout << "Enter a and b :";
+	cin >> a >> b;
+
+	primefinder(a, b);
+
+	cout << "There are " << counter << " primes between " << a << " and " << b << ".";
+}
+
+void primefinder(int a, int b)
+{
+	for (int i = a; i <= b; i++)//loop from a to b
+	{
+		primecounter = 0;
+		for (int j = 1; j <= i; j++)//prime finder
+		{
+			if (i % j == 0)
+			{
+				primecounter++;
+			}
+		}
+		if (primecounter == 2)
+		{
+			//cout << i << endl;
+			counter++;
+		}
+	}
+}
+*/
+
+#include <iostream>
+using namespace std;
+
+void primefinder(int, int);
+void prime(int);
+
+int a, b, counter = 0;
+
+int main()
+{
+	cout << "Enter a and b :";
+	cin >> a >> b;
+
+	primefinder(a, b);
+
+	cout << "There are " << counter << " primes between " << a << " and " << b << ".";
+}
+
+void primefinder(int a, int b)
+{
+	for (int i = a; i <= b; i++)//loop from a to b
+	{
+		prime(i);
+	}
+}
+
+void prime(int k)
+{
+	int primecounter = 0;
+	for (int j = 1; j <= k; j++)//prime finder
+	{
+		if (k % j == 0)
+		{
+			primecounter++;
+		}
+	}
+	if (primecounter == 2)
+	{
+		//cout << i << endl;
+		counter++;
+	}
+}	
