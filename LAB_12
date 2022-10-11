@@ -1,0 +1,132 @@
+/// 10413663, Chi Chiu Pong
+/// 10/11/2022
+/// LAB_12, Problem 1
+
+#include <iostream>
+using namespace std;
+
+int sumOfAllDigits(int m);
+
+int main() {
+	int n;
+	char y_n;
+	do{
+		cout << "Enter one integer : ";
+		cin >> n;
+		cout << "The sum of the digits are : " << sumOfAllDigits(n) << "." << endl;
+		cout << "More (y/n) : ";
+		cin >> y_n;
+		cout << endl;
+	} while (y_n == 'y' || y_n == 'Y');
+}
+
+int sumOfAllDigits(int m) {
+	int sum = 0,next;
+
+	while (m > 0)
+	{
+		next = m % 10;
+		sum += next;
+		m /= 10;
+	}
+	return sum;
+}
+
+/// 10413663, Chi Chiu Pong
+/// 10/11/2022
+/// LAB_12, Problem 2
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int findMax(int a, int b, int c, int d);
+int findMin(int a, int b, int c, int d);
+int myPower(int a, int b);
+
+int main(){
+	int a, b, c, d;
+	cout << "Enter four integers : ";
+	cin >> a >> b >> c >> d;
+
+	cout << "Max     :" << findMax(a, b, c, d)<<endl;
+	cout << "Min     :" << findMin(a, b, c, d)<<endl;
+	cout << "Result  :" << myPower(findMax(a, b, c, d), findMin(a, b, c, d));
+}
+
+int findMax(int a, int b, int c, int d) {
+	int max=a;
+	if (b > max)
+	{
+		max = b;
+	}
+	else if (c > max)
+	{
+		max = c;
+	}
+	else if (d > max)
+	{
+		max = d;
+	}
+	return max;
+}
+int findMin(int a, int b, int c, int d) {
+	int min=a;
+	if (b < min)
+	{
+		min = b;
+	}
+	else if (c < min)
+	{
+		 min = c;
+	}
+	else if (d < min)
+	{
+		min = d;
+	}
+	return min;
+}
+int myPower(int a, int b) {
+	return pow(a, b);
+}
+
+
+/// 10413663, Chi Chiu Pong
+/// 10/11/2022
+/// LAB_12, Problem 3
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int slotmachine();
+
+int main() {
+	char again;
+	do{
+		slotmachine();
+		cout << endl << "Play again (y/n)?: ";
+		cin >> again;
+	} while (again == 'y' || again == 'Y');
+}
+
+int slotmachine() {
+	int a, b, c;
+	srand(time(NULL));
+	a = rand() % 10;
+	b = rand() % 10;
+	c = rand() % 10;
+	cout << a << " " << b << " " << c << endl;
+	if (a == b && a == c)
+	{
+		cout << "Jackpot!!!";
+	}
+	else if (a == b || a == c || b == c)
+	{
+		cout << "Matched 2!!";
+	}
+
+	else cout << "No match";
+	cout << endl << "------------------"<<endl;
+	return a << b << c;
+}
