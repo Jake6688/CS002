@@ -1,0 +1,119 @@
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+//calculate func
+double x_tothe_n(int,int);///x^n
+int factorial(int);///factorial calculator
+
+int main() {
+
+	int x, n;
+	double sum=0;
+	cout << "Enter n : ";
+	cin >> n;
+	cout << "Enter x : ";
+	cin >> x;
+	
+	cout.setf(ios::fixed);
+	cout.setf(ios::showpoint);
+	cout.precision(3);
+
+	for (int i = 0; i <= n; i++)
+	{
+
+		sum += x_tothe_n(x, i) / factorial(i);
+
+		cout << setw(3) << i << " : " << sum << endl;
+
+	}
+	
+}
+
+
+double x_tothe_n(int a, int b)///want input x and n, output current calling 
+{
+	int xn = pow(a, b);
+	return xn;
+}
+
+int factorial(int a)
+{
+	int factorial=1;
+	while (a > 0)
+	{
+		factorial *= a;
+		a--;
+	}
+	return factorial;
+}
+
+
+
+#include <iostream>
+using namespace std;
+
+int current(int);
+int sum(int);
+
+int main() {
+	int n, current = 0;
+
+	cout << "Enter n :";
+	cin >> n;
+
+	for (int i = 1; i < n; i++) {
+
+		current += i;
+		cout << current << " + ";
+		current *= 10;
+	}
+
+	cout << current + n << " = " << sum(n);
+
+}
+
+int sum(int a)
+{
+	int current = 0, sum = 0;
+
+	for (int i = 1; i <= a; i++) {
+		current += i;
+		sum += current;
+		current *= 10;
+	}
+	return sum;
+}
+
+
+
+#include <iostream>
+using namespace std;
+
+int compute(int, int);
+
+int main() {
+
+	int n, x;
+	cout << "Enter n : ";
+	cin >> n;
+	cout << "Enter x : ";
+	cin >> x;
+
+
+
+	cout << "Total : " << compute(x,n);
+}
+
+
+int compute(int a, int b) {
+
+	int sum = 0, current, modifier = -1;
+
+	for (int i = 1; i <= 2 * b; i += 2) {
+		modifier *= -1;
+		current = pow(a, i);
+		sum += current * modifier;
+	}
+	return sum;
+}
