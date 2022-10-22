@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+	int n = 10;
+	for (int i = 1; i <= n; i++)
+	{
+		int m = 1;
+		for (int j = 1; j <= i; j++)
+		{
+			cout << m << " ";
+			m = m * (i - j) / j;
+		}
+		cout << endl;
+	}
+	return 0;
+}
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n, outn = 1;
+	char ochar = 65;
+	cout << "Enter n (n<=26) : ";
+	cin >> n;
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j < 2 * n; j++) {
+			
+			if (j <= n - i)
+				cout << " ";
+		}
+		for (int j = 1; j < i; j++) {
+			cout << ochar;
+			ochar++;
+		}
+		for (int j = i; j > 0; j--) {
+			cout << ochar;
+			ochar--;
+		}
+		cout << endl;
+		ochar = 65;
+	}
