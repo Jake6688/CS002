@@ -1,0 +1,169 @@
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+	int a[10];
+	const int size = 10;
+	for (int i = 0; i < size; i++) 
+	{
+		cout << "Enter A[" << i << "] = ";
+		cin >> a[i];
+	}
+
+	cout << "------------------------------------------------------------"<<endl;
+	cout << "The contents of A are ";
+
+	for (int i = 0; i < size; i++) {
+		cout << a[i]<<" ";
+	}
+
+	cout << endl << "------------------------------------------------------------" << endl;
+
+	int max = a[0];
+	for (int i = 0; i < size; i++) {
+		if (a[i] > max) max = a[i];
+	}
+	cout << "Max number : " << max << endl;
+
+	int min = a[0];
+	for (int i = 0; i < size; i++) {
+		if (a[i] < min) min = a[i];
+	}
+	cout << "Min number : " << min << endl;
+}
+
+
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main() {
+
+	int a[10];
+	const int size = 10;
+	srand(time(NULL));
+
+	cout << "Numbers in array A"<<endl;
+	cout << "-------------------" << endl;
+
+	for (int i = 0; i < size; i++) {
+		int random_number = rand()%20+1;
+		a[i] = random_number;
+	}
+
+	for (int i = 0; i < size; i++) {
+		cout << "A [" << i << "] = " << a[i] << endl;
+	}
+
+	int max = a[0];
+	int index = 0;
+	for (int i = 0; i < size; i++) {
+		if (a[i] > max) {
+			max = a[i];
+			index = i;
+		}
+	}
+	cout << "The maximum number is " << max << " at " << index;
+}
+
+
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+string func(int);
+void func_2(int,int,int,int a[]);
+void func_3(int, int, int a[]);
+int main() {
+
+	int a[10];
+	const int size = 10;
+	srand(time(NULL));
+
+	cout << "Numbers in array A" << endl;
+	cout << "-------------------" << endl;
+
+	for (int i = 0; i < size; i++) {
+		int random_number = rand() % 20 + 1;
+		a[i] = random_number;
+	}
+
+	for (int i = 0; i < size; i++) {
+		cout << "A [" << i << "] = " << a[i] << endl;
+	}
+
+	int max = a[0];
+	for (int i = 0; i < size; i++) {
+		if (a[i] >= max) {
+			max = a[i];
+		}
+	}
+
+	int max_counter=0;
+	for (int i = 0; i < size; i++) {
+		if (a[i] == max) max_counter++;
+	}
+
+	if (max_counter == 1) cout << "There is one " << max << endl;
+	else
+	{
+		cout << "There are " << func(max_counter) << " " << max << "s." << endl;
+	}
+
+	if (max_counter == 1) {
+		cout << "The index of " << max << " is ";
+		func_3(size, max, a);
+	}
+	
+	else if (max_counter > 1) {
+		cout << "The indices of " << max << " are ";
+		func_2(max, max_counter, size, a);
+	}
+}
+
+string func(int n) {
+
+	if (n == 2) { return "two"; }
+
+	else if (n == 3) { return "three"; }
+
+	else if (n == 4) { return "four";}
+
+	else if (n == 5) { return "five";}
+
+	else if (n == 6) { return "six";}
+
+	else if (n == 7) { return "seven";}
+
+	else if (n == 8) { return "eight";}
+
+	else if (n == 9) { return "nine";}
+
+	else if (n == 10) { return "ten";}
+}
+
+void func_2(int max, int max_count ,int size , int a[]) {
+	int count=0;
+	for (int i = 0; i < size; i++) {
+		if (a[i] == max && max_count>1 && count < max_count - 1) {
+			cout << i << ", ";
+			count++;
+		} 
+		else if (a[i] == max && count == max_count - 1) {
+			cout << "and " << i << ".";
+		}
+	}
+}
+
+void func_3(int size,int max, int a[]) {
+	for (int i = 0; i < size; i++)
+	{
+		if (a[i] == max) {
+			cout << i << ".";
+		}
+	}
+}
