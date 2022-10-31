@@ -1,0 +1,168 @@
+/// 10413663, Chi Chiu Pong
+/// 10/27/2022
+/// LAB_16, Problem 1
+
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main() {
+	const int size = 10;
+	int a[10];
+
+	srand(time(NULL));
+
+	for (int i = 0; i < size; i++) {
+		a[i] = rand() % 50 + 1;
+	}
+
+	cout << "Original Array" << endl;
+	cout << "----------------------------" << endl;
+
+	for (int i = 0; i < size; i++) {
+		cout << a[i] << " ";
+	}
+	cout << endl;
+
+	///swapping
+	for (int i = 0; i < size; i += 2) {
+		int temp = a[i];
+		a[i] = a[i + 1];
+		a[i + 1] = temp;
+	}
+
+	cout << endl << "After swapping" << endl;
+	cout << "----------------------------" << endl;
+
+	for (int i = 0; i < size; i++) {
+		cout << a[i] << " ";
+	}
+}
+/// 10413663, Chi Chiu Pong
+/// 10/27/2022
+/// LAB_16, Problem 2
+
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int searcher(int, int a[10],int);
+
+int main() {
+
+	char y_n = 'y';
+
+	do{
+		const int size = 10;
+		int a[10];
+		srand(time(NULL));
+
+		for (int i = 0; i < size; i++) {
+			int n = rand() % 15 + 1;
+			if (searcher(n, a, size) == 0) {
+				///if value wasnt assigned before 
+				a[i] = n;
+			}
+			else if (searcher(n, a, size) == 1) {
+				i--;
+			}
+		}
+
+		for (int i = 0; i < size; i++) {
+			cout << a[i] << " ";
+		}
+
+		cout << endl << "More (y/n)? ";
+		cin >> y_n;
+	} while (y_n == 'y');
+}
+
+
+int searcher(int n, int a[10],int size) {
+	for (int i = 0; i < size; i++) {
+		
+		if (a[i] == n) {
+			return 1; ///true == value assigned in array 
+		}
+	}
+	return 0; ///false == value not assinged in array
+}
+
+/// 10413663, Chi Chiu Pong
+/// 10/27/2022
+/// LAB_16, Problem 3
+
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int searcher(int, int a[10], int);
+void max_finder(int a[10],int);
+
+int main() {
+
+	char y_n = 'y';
+
+	do {
+		const int size = 10;
+		int a[10];
+		srand(time(NULL));
+
+		for (int i = 0; i < size; i++) {
+			int n = rand() % 15 + 1;
+			if (searcher(n, a, size) == 0) {
+				///if value wasnt assigned before 
+				a[i] = n;
+			}
+			else if (searcher(n, a, size) == 1) {
+				i--;
+			}
+		}
+
+		for (int i = 0; i < size; i++) {
+			cout << a[i] << " ";
+		}
+
+		max_finder(a,size);
+
+		cout << "More (y/n)? ";
+		cin >> y_n;
+	} while (y_n == 'y');
+}
+
+
+int searcher(int n, int a[10], int size) {
+	for (int i = 0; i < size; i++) {
+
+		if (a[i] == n) {
+			return 1; ///true == value assigned in array 
+		}
+	}
+	return 0; ///false == value not assinged in array
+}
+
+void max_finder(int a[10],int size) {
+	int max1, max2=0, max3=0;
+
+	max1 = a[0];
+	for (int i = 0; i < size; i++) {
+		if (a[i] > max1) max1 = a[i];
+	}
+
+	
+	for (int i = 0; i < size; i++) {
+		if (a[i] > max2 && a[i] < max1) max2 = a[i];
+	}
+
+	
+	for (int i = 0; i < size; i++) {
+		if (a[i] > max3 && a[i] < max2) max3 = a[i];
+	}
+
+	cout << endl<<"** The largest number is " << max1<<endl;
+	cout << "** The second largest number is " << max2<<endl;
+	cout << "** The third largest number is " << max3<<endl;
+}
