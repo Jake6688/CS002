@@ -48,24 +48,24 @@ int main() {
 #include <cstdlib>
 using namespace std;
 
-int searcher(int, int a[10],int);
+int searcher(int, int a[], int);
 
 int main() {
 
 	char y_n = 'y';
 
-	do{
+	do {
 		const int size = 10;
 		int a[10];
 		srand(time(NULL));
 
 		for (int i = 0; i < size; i++) {
 			int n = rand() % 15 + 1;
-			if (searcher(n, a, size) == 0) {
+			if (searcher(n, a, i) == 0) {
 				///if value wasnt assigned before 
 				a[i] = n;
 			}
-			else if (searcher(n, a, size) == 1) {
+			else if (searcher(n, a, i) == 1) {
 				i--;
 			}
 		}
@@ -79,17 +79,14 @@ int main() {
 	} while (y_n == 'y');
 }
 
-
-int searcher(int n, int a[10],int size) {
-	for (int i = 0; i < size; i++) {
-		
+int searcher(int n, int a[], int current_size) {
+	for (int i = 0; i <= current_size-1 ; i++) {
 		if (a[i] == n) {
 			return 1; ///true == value assigned in array 
 		}
 	}
 	return 0; ///false == value not assinged in array
-}
-
+}	
 /// 10413663, Chi Chiu Pong
 /// 10/27/2022
 /// LAB_16, Problem 3
@@ -99,8 +96,8 @@ int searcher(int n, int a[10],int size) {
 #include <cstdlib>
 using namespace std;
 
-int searcher(int, int a[10], int);
-void max_finder(int a[10],int);
+int searcher(int, int a[], int);
+void max_finder(int a[], int);
 
 int main() {
 
@@ -113,11 +110,11 @@ int main() {
 
 		for (int i = 0; i < size; i++) {
 			int n = rand() % 15 + 1;
-			if (searcher(n, a, size) == 0) {
-				///if value wasnt assigned before 
+			if (searcher(n, a, i) == 0) {
+				///if value wasnt assigned before
 				a[i] = n;
 			}
-			else if (searcher(n, a, size) == 1) {
+			else if (searcher(n, a, i) == 1) {
 				i--;
 			}
 		}
@@ -126,7 +123,7 @@ int main() {
 			cout << a[i] << " ";
 		}
 
-		max_finder(a,size);
+		max_finder(a, size);
 
 		cout << "More (y/n)? ";
 		cin >> y_n;
@@ -134,35 +131,34 @@ int main() {
 }
 
 
-int searcher(int n, int a[10], int size) {
-	for (int i = 0; i < size; i++) {
-
+int searcher(int n, int a[], int current_size) {
+	for (int i = 0; i <= current_size-1 ; i++) {
 		if (a[i] == n) {
-			return 1; ///true == value assigned in array 
+			return 1; ///true == value assigned in array
 		}
 	}
 	return 0; ///false == value not assinged in array
 }
 
-void max_finder(int a[10],int size) {
-	int max1, max2=0, max3=0;
+void max_finder(int a[], int size) {
+	int max1, max2 = 0, max3 = 0;
 
 	max1 = a[0];
 	for (int i = 0; i < size; i++) {
 		if (a[i] > max1) max1 = a[i];
 	}
 
-	
+
 	for (int i = 0; i < size; i++) {
 		if (a[i] > max2 && a[i] < max1) max2 = a[i];
 	}
 
-	
+
 	for (int i = 0; i < size; i++) {
 		if (a[i] > max3 && a[i] < max2) max3 = a[i];
 	}
 
-	cout << endl<<"** The largest number is " << max1<<endl;
-	cout << "** The second largest number is " << max2<<endl;
-	cout << "** The third largest number is " << max3<<endl;
+	cout << endl << "** The largest number is " << max1 << endl;
+	cout << "** The second largest number is " << max2 << endl;
+	cout << "** The third largest number is " << max3 << endl;
 }
