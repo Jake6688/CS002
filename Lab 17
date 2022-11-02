@@ -1,0 +1,183 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+void fillArray(int A[], int);
+void printArray(int A[], int);
+int findThree(int A[], int B[], int C[]);
+
+int main() {
+
+	int A[10], B[10], C[10];
+
+	srand(time(0));
+	fillArray(A, 10);
+	fillArray(B, 10);
+	fillArray(C, 10);
+
+	cout << "          Arrays" << endl;
+	cout << "----------------------------" << endl;
+	cout << "A : "; printArray(A, 10);
+	cout << "B : "; printArray(B, 10);
+	cout << "C : "; printArray(C, 10);
+	cout << endl;
+
+	int count = findThree(A, B, C);
+	cout << "\nThere are " << count << " numbers in A, B, and C." << endl;
+
+	return 0;
+}
+
+void fillArray(int A[], int size) {
+	for (int i = 0; i < size; i++) {
+		int t = rand() % 15 + 1;
+		bool exist = false;
+		for (int j = 0; j <= i; j++) {
+			if (A[j] == t) {
+				exist = true;
+				break;
+			}
+		}
+
+		if (!exist)
+			A[i] = t;
+		else
+			i--;
+	}
+}
+
+void printArray(int A[], int size) {
+
+	int i;
+	for (i = 0; i < size; i++)
+		cout << A[i] << " ";
+	cout << endl;
+}
+
+int findThree(int A[], int B[], int C[]) { 
+	int counter=0;
+	
+	for (int i = 0; i < 10; i++) {
+		int b_found=0, c_found=0;
+
+		for (int j = 0; j < 10; j++) {///find A[i} in C[]
+			if (A[i] == B[j]) {
+				b_found = 1;;
+			}
+		}
+
+		for (int j = 0; j < 10; j++) {///find A[i} in B[]
+			if (A[i] == C[j]) {
+				c_found =1;
+			}
+		}
+
+		if (b_found == 1 && c_found == 1) {
+			cout << A[i] << " ";
+			counter++;
+		}
+
+	}
+
+	return counter;
+}
+
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+void fillArray(int A[], int);
+void printArray(int A[], int);
+int findTwo(int A[], int B[], int C[]);
+
+int main() 
+{
+	int A[10], B[10], C[10];
+
+	srand(time(0));
+	fillArray(A, 10);
+	fillArray(B, 10);
+	fillArray(C, 10);
+
+	cout << "          Arrays" << endl;
+	cout << "----------------------------" << endl;
+	cout << "A : "; printArray(A, 10);
+	cout << "B : "; printArray(B, 10);
+	cout << "C : "; printArray(C, 10);
+	cout << endl;
+
+	cout << "\n\nNumbers both in A and B (not C)"<<endl;
+	cout << "-------------------------------"<<endl;
+	int count1 = findTwo(A, B, C);
+	cout << "\nThere are " << count1 << " numbers." << endl;
+
+	cout << "\n\nNumbers both in B and C (not A)"<<endl;
+	cout << "-------------------------------"<<endl;
+	int count2 = findTwo(B, C, A);
+	cout << "\nThere are " << count2 << " numbers." << endl;
+
+	cout << "\n\nNumbers both in A and C (not B)"<<endl;
+	cout << "-------------------------------"<<endl;
+	int count3 = findTwo(A, C, B);
+	cout << "\nThere are " << count3 << " numbers." << endl;
+
+	return 0;
+}
+
+void fillArray(int A[], int size) {
+	
+	for (int i = 0; i < size; i++) {
+		int t = rand() % 15 + 1;
+		bool exist = false;
+		for (int j = 0; j <= i; j++) {
+			if (A[j] == t) {
+				exist = true;
+				break;
+			}
+		}
+
+		if (!exist)
+			A[i] = t;
+		else
+			i--;
+	}
+}
+
+void printArray(int A[], int size) {
+
+	int i;
+	for (i = 0; i < size; i++)
+		cout << A[i] << " ";
+	cout << endl;
+}
+
+int findTwo(int A[], int B[], int C[]) {///(target array, target array, none target array)
+	int counter = 0;
+
+	for (int i = 0; i < 10; i++) {
+		int b_found = 0, c_found = 0;
+
+		for (int j = 0; j < 10; j++) {///find A[i} in C[]
+			if (A[i] == B[j]) {
+				b_found = 1;;
+			}
+		}
+
+		for (int j = 0; j < 10; j++) {///find A[i} in B[]
+			if (A[i] == C[j]) {
+				c_found = 1;
+			}
+		}
+
+		if (b_found == 1 && c_found == 0) {
+			cout << A[i] << " ";
+			counter++;
+		}
+
+	}
+
+	return counter;
+}
