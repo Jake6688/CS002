@@ -1,0 +1,139 @@
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+void inputArray(int A[],int);
+void outputArray(int A[], int);
+void maxdiff_calculator(int A[], int);
+
+int main() {
+	int A[10];
+	const int SIZE = 10;
+
+	inputArray(A,SIZE);
+
+	outputArray(A, SIZE);
+
+	maxdiff_calculator(A,SIZE);
+}
+
+void inputArray(int A[],int SIZE) {
+
+	for (int i = 0; i < SIZE; i++) {
+		cout << "A[" << i << "] = ";
+		cin >> A[i];
+	}
+}
+
+void outputArray(int A[], int SIZE) {
+	cout << "\n*** Array : ";
+	for (int i = 0; i < SIZE; i++) {
+		cout << setw(5) << A[i];
+	}
+
+	cout << endl;
+}
+
+void maxdiff_calculator(int A[], int SIZE) {
+	int max_diff = 0, max1_index,max2_index;
+	for (int i = 1; i < SIZE; i++) {
+		if (max_diff < abs(A[i] - A[i - 1]))
+		{
+			max_diff = abs(A[i] - A[i - 1]);
+			max1_index = i-1;
+			max2_index = i;
+		}
+	}
+	cout << "\nThe difference between the absolute values of " << max1_index << " and " << max2_index << " is the largest.";
+	cout << "\nThe difference is " << max_diff << endl;
+}
+
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+void fillArray(int A[],int);
+void printArray(int A[], int);
+void sortArray(int A[], int B[], int);
+int searchArray(int A[], int, int);
+
+int main() {
+
+	const int SIZE = 10;
+	int A[10],B[10] = {0,0,0,0,0,0,0,0,0,0};
+
+	fillArray(A, SIZE);
+	printArray(A, SIZE);
+	sortArray(A, B, SIZE);
+	
+	cout << "\nB :  ";
+	for (int i = 0; i < SIZE; i++) {
+		cout << B[i] << " ";
+	}
+}
+
+void fillArray(int A[], int SIZE) {
+
+	srand(time(NULL));
+
+	for (int i = 0; i < SIZE; i++) {
+		int n = rand() % 100;
+		if (searchArray(A,i,n) == 0) {
+			A[i] = n;
+		}
+		else i--;
+
+	}
+
+}
+
+void printArray(int A[], int SIZE) {
+	cout << "A :  ";
+	for (int i = 0; i < SIZE; i++) {
+		cout << A[i] << " ";
+	}
+}
+
+void sortArray(int A[], int B[], int SIZE) {
+
+	int back_placement_counter = 9, front_placement_counter = 0, max = 0, max_index, max_counter = 0;
+	
+	for (int i = 0; i < SIZE; i++) {///loops 10 times for A[]'s 10 indexes
+
+		for (int j = 0; j < SIZE; j++) {///find max and max_index
+			
+			if (max < A[j]) {
+				max = A[j];
+				max_index = j;
+			}
+		}
+
+		max_counter++;///max counter to identify whether max is even or odd the biggest number 
+		//cout << "\nMax is : " << max << "max index is : " << max_index << endl;
+
+
+		if ( max_counter % 2 == 1) {
+			B[front_placement_counter] = max;
+			front_placement_counter++;
+		}
+
+		if (max_counter % 2 == 0) {
+			B[back_placement_counter] = max;
+			back_placement_counter--;
+		}
+
+		A[max_index] = 0;
+		max = 0;
+		max_index = 0;
+	}
+}
+
+int searchArray(int A[],int SIZE, int a) {
+	for (int i=0; i < SIZE; i++) {
+		if (A[i] == a) return 1;
+	}
+		return 0;
+}
