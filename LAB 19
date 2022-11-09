@@ -1,0 +1,57 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+const int SIZE_A = 10, SIZE_B = 20;
+
+int searcher(int A[], int SIZE, int n);
+void fillArray(int A[], int SIZE);
+void rearrangeArray(int A[]);
+void printArray(int A[], int SIZE);
+
+
+int main() {
+
+	int A[10], B[20];
+	srand(time(NULL));
+	fillArray( A, SIZE_A );
+	printArray( A, SIZE_A );
+}
+
+int searcher(int A[],int SIZE,int n) {
+
+	for (int i = 0; i <= n; i++) {
+
+		if (A[i] == n) return 1;
+	
+	}
+
+	return 0;
+
+}
+
+void fillArary(int A[],int SIZE) {
+
+	for (int i = 0; i < SIZE; i++) {
+		int n = rand() % 100 + 1;
+
+		if (searcher(A, i, n) == 0) {
+			A[i] = n;
+		}
+
+		else i--;
+	}
+
+}
+
+void rearrangeArray(int A[]) {
+	int a =0;
+}
+
+void printArray(int A[], int SIZE) {
+
+	for (int i = 0; i < SIZE; i++) 
+		cout << A[i] << " ";
+
+}
