@@ -1,57 +1,157 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <iomanip>
 using namespace std;
 
 const int SIZE_A = 10, SIZE_B = 20;
 
-int searcher(int A[], int SIZE, int n);
+int searcheArray(int A[], int SIZE, int n);
 void fillArray(int A[], int SIZE);
-void rearrangeArray(int A[]);
+void rearrangeArray(int A[],int B[],int,int);
 void printArray(int A[], int SIZE);
 
 
 int main() {
 
 	int A[10], B[20];
-	srand(time(NULL));
-	fillArray( A, SIZE_A );
-	printArray( A, SIZE_A );
+
+	fillArray(A, SIZE_A);
+	printArray(A, SIZE_A);
+	rearrangeArray(A, B, SIZE_A, SIZE_B);
+	cout << endl;
+	printArray(B, SIZE_B);
 }
 
-int searcher(int A[],int SIZE,int n) {
-
-	for (int i = 0; i <= n; i++) {
-
-		if (A[i] == n) return 1;
-	
+int searchArray(int A[], int SIZE, int a) {
+	for (int i = 0; i < SIZE; i++) {
+		if (A[i] == a) return 1;
 	}
-
 	return 0;
-
 }
 
-void fillArary(int A[],int SIZE) {
+void fillArray(int A[], int SIZE) {
+
+	srand(time(NULL));
 
 	for (int i = 0; i < SIZE; i++) {
-		int n = rand() % 100 + 1;
-
-		if (searcher(A, i, n) == 0) {
+		int n = rand() % 100;
+		if (searchArray(A, i, n) == 0) {
 			A[i] = n;
 		}
-
 		else i--;
+
 	}
 
 }
 
-void rearrangeArray(int A[]) {
-	int a =0;
+void rearrangeArray(int A[], int B[], int SIZE_A, int SIZE_B) {
+	
+	int even_index_counter=0, odd_index_counter=1;
+
+	for (int i = 0; i < SIZE_B; i++) {
+		B[i] = 0;
+	}
+
+	for (int i = 0; i < SIZE_A; i++) {
+		
+		if (A[i] % 2 == 0)
+		{
+			B[even_index_counter] = A[i];
+			even_index_counter += 2;
+		}
+
+		else if (A[i] % 2 == 1) 
+		{
+			B[odd_index_counter] = A[i];
+			odd_index_counter += 2;
+		}
+	}
 }
 
 void printArray(int A[], int SIZE) {
+	for (int i = 0; i < SIZE; i++)
+		cout << setw(3) << A[i] << " ";
+}
 
+
+#include <iostream>
+using namespace std;
+
+int repeatchecker(char alpha[], char, int);
+void delete_char(char alpha[], char, int);
+void sort(char alpha[]);
+int find_next_alpha(char alpha[],int);
+
+const int SIZE = 10;
+
+int main() {
+
+	char alpha[10] = { 0 };
+
+	alpha[0] = 'm';
+	alpha[1] = 't';
+	alpha[2] = 't';
+	alpha[3] = 'a';
+	alpha[4] = 'd';
+	alpha[5] = 'm';
+	alpha[6] = 'c';
+	alpha[7] = 'c';
+	alpha[8] = 'a';
+	///check repeat
+	
 	for (int i = 0; i < SIZE; i++) 
-		cout << A[i] << " ";
+	{
+		if (repeatchecker(alpha, alpha[i], i) == 1) {///if there is repeating alpha[i] char in index i+1 to index SIZE in alpha, then
+			char a = alpha[i];///char a is the repeating char
+			delete_char(alpha,a,i);	///delete repeat char a from i+1 to SIZE in alpha
+		}
+	}
 
+	sort(alpha);///sorts char from space between char in array to no space between char in array
+
+	cout << "After deleting repeat" << endl;
+
+	for (int i = 0; i < SIZE; i++) {///print out array alpha
+		if (alpha[i] != '\0') {
+			cout << alpha[i] << endl;
+		}
+	}
+}
+
+int repeatchecker(char alpha[], char a, int current_position) ///start checking repeating characters after starting position + 1
+{
+	for (int i = current_position + 1 ; i < SIZE; i++) {
+		if (alpha[i] == a) return 1;
+	}
+	return 0;
+}
+
+void delete_char(char alpha[],char a,int starting_position) ///delete same character after starting position + 1
+{
+	for (int i = starting_position + 1; i < SIZE; i++) {
+		if (alpha[i] == a) {
+			alpha[i] = '\0';
+		}
+	}
+}
+
+void sort(char alpha[]) {
+	for (int i = 0; i < SIZE; i++) {
+		if (!isalpha(alpha[i])) {
+			alpha[i] = alpha[find_next_alpha(alpha, i)];
+			alpha[find_next_alpha(alpha, i)] = '\0';
+		}
+	}
+}
+
+int find_next_alpha(char alpha[], int starting_position) {
+	
+	for (int i = starting_position + 1; i < SIZE; i++) {
+		if ( isalpha(alpha[i]) ) {
+			return i;
+		}
+
+	}
+	return starting_position;
 }
