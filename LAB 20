@@ -79,9 +79,21 @@ using namespace std;
 
 void zero(int x[], int xxs, int y[], int ys) 
 {
-	for (int i = 0; i < ys; i++) {
-		for (int j = 0; j < xxs; j++) {
-			if (y[i] == x[j]) x[j] = 0;
+
+	for (int i = 0; i < xxs; i++) {///loop all num in a1[]
+		bool t_f = true;
+		for (int j = 0; j < ys; j++) {///loop ys num in a1[]
+			if (!(x[i + j] == y[j])) {
+				cout << "x[i+j] : " << x[i + j] << endl << "y[j] : " << y[j]<<endl;
+				t_f = false;
+			}
+		}
+		cout << "current cycle finished."<<endl;
+		cout << t_f<<endl;
+		for (int j = 0; j < ys; j++) {///loop ys num in a1[]
+			if (t_f == true) {
+				x[i + j] = 0;
+			}
 		}
 	}
 }
@@ -96,13 +108,12 @@ void printArray(int x[], int size)
 }
 
 int main() {
+	int a1[] = { 1, 2, 3, 4, 5, 1, 2, 3, 4, 1, 2, 3, 4, 5, 1, 2, 3 };
+	int a2[] = { 1, 2, 3, 4, 5 };
 
-	int a1[] = { 1,2,3,4,1,2,3,4,5 };
-	int a2[] = { 2,3,4};
-
-	zero(a1, 9, a2, 3);
+	zero(a1, 17, a2, 5);
 	cout << "a1 : ";
-	printArray(a1, 9);
+	printArray(a1, 17);
 	cout << "a2 : ";
-	printArray(a2, 3);
+	printArray(a2, 5);
 }
