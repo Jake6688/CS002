@@ -80,24 +80,23 @@
 #include<iomanip>
 using namespace std;
 
-const int SIZE = 36;
 string fileName1, fileName2;
 
-void func1(int id[], int cpp[], int java[], string name[]);
+void func1(int id[], int cpp[], int java[], string name[], int arrsize);
 
-void func2(int id[], int cpp[], int java[], string name[]);
+void func2(int id[], int cpp[], int java[], string name[], int arrsize);
 
-void func3();
+void func3(string str1, string str2, int arrsize);
 
-void func4(int id[], int cpp[], int java[], string name[]);
+void func4(int id[], int cpp[], int java[], string name[], int arrsize);
 
-void func5();
+void func5(int id[], int cpp[], int java[], string name[], int arrsize);
 
-void print(int id[], string name[], int java[], int cpp[]);
+void print(int id[], string name[], int java[], int cpp[], int arrsize);
 
 int main() {
-
-	int id[36],cpp[36],java[36];
+	const int SIZE = 36;
+	int id[36], cpp[36], java[36];
 	string name[36];
 	cout << "Enter the fileName1 : ";
 	cin >> fileName1;
@@ -106,8 +105,8 @@ int main() {
 	fileName1 = "student.txt";
 	fileName2 = "score.txt";
 
-	int choice=0;
-	do{
+	int choice = 0;
+	do {
 		cout << "\n-------------------------------" << endl;
 		cout << "             Menu              " << endl;
 		cout << "-------------------------------" << endl;
@@ -121,19 +120,16 @@ int main() {
 		cout << "Choose one menu (1~6) : ";
 		cin >> choice;
 
-		if (choice == 1) func1(id, cpp, java, name);
-		else if (choice == 2)func2(id, cpp, java, name);
-		else if (choice == 3)func3();
-		else if (choice == 4) func4(id, cpp, java, name);
-		else if (choice == 5)cout << 5;
+		if (choice == 1) func1(id, cpp, java, name, SIZE);
+		else if (choice == 2)func2(id, cpp, java, name, SIZE);
+		else if (choice == 3)func3(fileName1, fileName2, SIZE);
+		else if (choice == 4)func4(id, cpp, java, name, SIZE);
+		else if (choice == 5)func5(id, cpp, java, name, SIZE);
 
-	} while (choice <6 && choice > 0);
-
-
-
+	} while (choice < 6 && choice > 0);
 }
 
-void func1(int id[],int cpp[], int java[], string name[]) {
+void func1(int id[], int cpp[], int java[], string name[], int arrsize) {
 	int idnum, score_idnum, cpp_score, java_score;
 	string namestr;
 
@@ -147,53 +143,15 @@ void func1(int id[],int cpp[], int java[], string name[]) {
 	if (iStream.fail()) cout << "Input File Read error";
 	if (iStream2.fail()) cout << "Input File2 Read error";
 
-	for (int i = 0; i < SIZE; i++) {///reads in id number and name 
+	for (int i = 0; i < arrsize; i++) {///reads in id number and name 
 		iStream >> idnum >> namestr;
 		id[i] = idnum;
 		name[i] = namestr;
 	}
 
-	for (int i = 0; i < SIZE; i++) {///reads in id number, c++ and java score
+	for (int i = 0; i < arrsize; i++) {///reads in id number, c++ and java score
 		iStream2 >> score_idnum >> cpp_score >> java_score;
-		for (int j = 0; j < SIZE; j++) {
-			if (id[j]==score_idnum) {
-				cpp[j]=cpp_score;
-				java[j] = java_score;
-			}
-		}
-	}
-
-	iStream.close();
-	iStream2.close();
-
-	cout << "***** Menu 1 Result *****" << endl;
-	cout << "-------------------------" << endl;
-	print(id, name, java, cpp);
-}
-
-void func2(int id[], int cpp[], int java[], string name[]) {
-	int idnum, score_idnum, cpp_score, java_score;
-	string namestr;
-
-
-	ifstream iStream;
-	ifstream iStream2;
-
-	iStream.open(fileName1);
-	iStream2.open(fileName2);
-
-	if (iStream.fail()) cout << "Input File Read error";
-	if (iStream2.fail()) cout << "Input File2 Read error";
-
-	for (int i = 0; i < SIZE; i++) {///reads in id number and name 
-		iStream >> idnum >> namestr;
-		id[i] = idnum;
-		name[i] = namestr;
-	}
-
-	for (int i = 0; i < SIZE; i++) {///reads in id number, c++ and java score
-		iStream2 >> score_idnum >> cpp_score >> java_score;
-		for (int j = 0; j < SIZE; j++) {
+		for (int j = 0; j < arrsize; j++) {
 			if (id[j] == score_idnum) {
 				cpp[j] = cpp_score;
 				java[j] = java_score;
@@ -203,22 +161,57 @@ void func2(int id[], int cpp[], int java[], string name[]) {
 
 	iStream.close();
 	iStream2.close();
-	
-	print(id, name, java, cpp);
-	cout << "\n";
 
-	int i,j,min_idx;
-	for ( i = 0; i < SIZE-1; i++) {
+	cout << "\n***** Menu 1 Result *****" << endl;
+	cout << "-------------------------" << endl;
+	print(id, name, java, cpp, arrsize);
+}
+
+void func2(int id[], int cpp[], int java[], string name[], int arrsize){
+	int idnum, score_idnum, cpp_score, java_score;
+	string namestr;
+
+
+	ifstream iStream;
+	ifstream iStream2;
+
+	iStream.open(fileName1);
+	iStream2.open(fileName2);
+
+	if (iStream.fail()) cout << "Input File Read error";
+	if (iStream2.fail()) cout << "Input File2 Read error";
+
+	for (int i = 0; i < arrsize; i++) {///reads in id number and name 
+		iStream >> idnum >> namestr;
+		id[i] = idnum;
+		name[i] = namestr;
+	}
+
+	for (int i = 0; i < arrsize; i++) {///reads in id number, c++ and java score
+		iStream2 >> score_idnum >> cpp_score >> java_score;
+		for (int j = 0; j < arrsize; j++) {
+			if (id[j] == score_idnum) {
+				cpp[j] = cpp_score;
+				java[j] = java_score;
+			}
+		}
+	}
+
+	iStream.close();
+	iStream2.close();
+
+	int i, j, min_idx;
+	for (i = 0; i < arrsize - 1; i++) {
 		min_idx = i;
-		for ( j = i + 1; j < SIZE; j++) {
+		for (j = i + 1; j < arrsize; j++) {
 			if (id[j] < id[min_idx]) {
 				min_idx = j;
 			}
 		}
 		if (min_idx != i) {
-			int temp = cpp[i];
+			int cpp_temp = cpp[i];
 			cpp[i] = cpp[min_idx];
-			cpp[min_idx] = temp;
+			cpp[min_idx] = cpp_temp;
 
 			int id_temp = id[i];
 			id[i] = id[min_idx];
@@ -230,29 +223,30 @@ void func2(int id[], int cpp[], int java[], string name[]) {
 
 			string name_temp = name[i];
 			name[i] = name[min_idx];
-			name[min_idx] = temp;
+			name[min_idx] = name_temp;
 		}
 	}
 
 
-	print(id, name, java, cpp);
+	cout << "\n***** Menu 2 Result *****" << endl;
+	cout << "-------------------------" << endl;
+	print(id, name, java, cpp, arrsize);
 }
 
-void func3()
-{
-	int score_idnum, cpp_score, java_score, cpp_total=0, java_total=0;
+void func3(string str1, string str2, int arrsize){
+	int score_idnum, cpp_score, java_score, cpp_total = 0, java_total = 0;
 	string namestr;
 
 	ifstream iStream;
 	ifstream iStream2;
 
-	iStream.open(fileName1);
-	iStream2.open(fileName2);
+	iStream.open(str1);
+	iStream2.open(str2);
 
 	if (iStream.fail()) cout << "Input File Read error";
 	if (iStream2.fail()) cout << "Input File2 Read error";
 
-	for (int i = 0; i < SIZE; i++) {///reads in id number, c++ and java score
+	for (int i = 0; i < arrsize; i++) {///reads in id number, c++ and java score
 		iStream2 >> score_idnum >> cpp_score >> java_score;
 		java_total += java_score;
 		cpp_total += cpp_score;
@@ -261,11 +255,11 @@ void func3()
 	cout << "\n***** Menu 3 Result *****\n";
 	cout << "-------------------------\n";
 
-	cout << "Average of C++ : " << setprecision(4) << showpoint << static_cast<double>(cpp_total) / SIZE << endl;
-	cout << "Average of Java : " << setprecision(4) << showpoint << static_cast<double>(java_total) / SIZE << endl;
+	cout << "Average of C++  : " << setprecision(4) << showpoint << static_cast<double>(cpp_total) / arrsize << endl;
+	cout << "Average of Java : " << setprecision(4) << showpoint << static_cast<double>(java_total) / arrsize << endl;
 }
 
-void func4(int id[], int cpp[], int java[], string name[]) {
+void func4(int id[], int cpp[], int java[], string name[], int arrsize){
 	int idnum, score_idnum, cpp_score, java_score;
 	string namestr;
 
@@ -284,15 +278,15 @@ void func4(int id[], int cpp[], int java[], string name[]) {
 		cout << "Input File2 Read error";
 	}
 
-	for (int i = 0; i < SIZE; i++) {///reads in id number and name 
+	for (int i = 0; i < arrsize; i++) {///reads in id number and name 
 		iStream >> idnum >> namestr;
 		id[i] = idnum;
 		name[i] = namestr;
 	}
 
-	for (int i = 0; i < SIZE; i++) {///reads in id number, c++ and java score
+	for (int i = 0; i < arrsize; i++) {///reads in id number, c++ and java score
 		iStream2 >> score_idnum >> cpp_score >> java_score;
-		for (int j = 0; j < SIZE; j++) {
+		for (int j = 0; j < arrsize; j++) {
 			if (id[j] == score_idnum) {
 				cpp[j] = cpp_score;
 				java[j] = java_score;
@@ -303,17 +297,10 @@ void func4(int id[], int cpp[], int java[], string name[]) {
 	iStream.close();
 	iStream2.close();
 
-	for (int i = 0; i < SIZE; i++) {
-		cout << i << " " << setw(2) << id[i] << setw(10) << name[i]
-			<< setw(3) << cpp[i] << setw(3) << java[i] << endl;
-	}
-
-
 	int i, j, min_idx;
-
-	for (i = 0; i < SIZE - 1; i++) {
+	for (i = 0; i < arrsize - 1; i++) {
 		min_idx = i;
-		for (j = i + 1; j < SIZE; j++) {
+		for (j = i + 1; j < arrsize; j++) {
 			if (cpp[j] > cpp[min_idx]) {
 				min_idx = j;
 			}
@@ -337,9 +324,9 @@ void func4(int id[], int cpp[], int java[], string name[]) {
 		}
 	}
 
-	/*for (i = 0; i < SIZE - 1; i++) {
+	for (i = 0; i < arrsize - 1; i++) {
 		min_idx = i;
-		for (j = i + 1; j < SIZE; j++) {
+		for (j = i + 1; j < arrsize; j++) {
 			if ((cpp[i] == cpp[j]) && (java[i] <= java[j])) {
 				min_idx = j;
 			}
@@ -361,24 +348,240 @@ void func4(int id[], int cpp[], int java[], string name[]) {
 			name[i] = name[min_idx];
 			name[min_idx] = name_string;
 		}
-	}*/
+	}
 
 	cout << "\n***** Menu 4 Result *****\n";
 	cout << "-------------------------\n";
 
-	for (int i = 0; i < SIZE; i++) {
-		cout << i << " " << setw(2) << id[i] << setw(10) << name[i]
+	for (int i = 0; i < arrsize; i++) {
+		cout << setw(2) << id[i] << setw(10) << name[i]
 			<< setw(3) << cpp[i] << setw(3) << java[i] << endl;
 	}
 }
 
-void func5();
+void func5(int id[], int cpp[], int java[], string name[], int arrsize) {
+	int idnum, score_idnum, cpp_score, java_score;
+	string namestr;
 
-void print(int id[],string name[], int java[], int cpp[]) {
 
-	for (int i = 0; i < SIZE; i++) {
-		cout << setw(2) << id[i] << setw(10) << name[i] 
-		<< setw(3) << cpp[i] << setw(3) << java[i] << endl;
+	ifstream iStream;
+	ifstream iStream2;
+
+	iStream.open(fileName1);
+	iStream2.open(fileName2);
+
+	if (iStream.fail()) {
+		cout << "Input File Read error";
 	}
 
+	if (iStream2.fail()) {
+		cout << "Input File2 Read error";
+	}
+
+	for (int i = 0; i < arrsize; i++) {///reads in id number and name 
+		iStream >> idnum >> namestr;
+		id[i] = idnum;
+		name[i] = namestr;
+	}
+
+	for (int i = 0; i < arrsize; i++) {///reads in id number, c++ and java score
+		iStream2 >> score_idnum >> cpp_score >> java_score;
+		for (int j = 0; j < arrsize; j++) {
+			if (id[j] == score_idnum) {
+				cpp[j] = cpp_score;
+				java[j] = java_score;
+			}
+		}
+	}
+
+	iStream.close();
+	iStream2.close();
+
+	int i, j, min_idx;///sort data in ascending id order
+
+	for (i = 0; i < arrsize - 1; i++) {
+		min_idx = i;
+		for (j = i + 1; j < arrsize; j++) {
+			if (id[j] < id[min_idx]) {
+				min_idx = j;
+			}
+		}
+		if (min_idx != i) {
+			int cpp_temp = cpp[i];
+			cpp[i] = cpp[min_idx];
+			cpp[min_idx] = cpp_temp;
+
+			int id_temp = id[i];
+			id[i] = id[min_idx];
+			id[min_idx] = id_temp;
+
+			int java_temp = java[i];
+			java[i] = java[min_idx];
+			java[min_idx] = java_temp;
+
+			string name_temp = name[i];
+			name[i] = name[min_idx];
+			name[min_idx] = name_temp;
+		}
+	}
+	
+	cout << "\n***** Menu 5 Result *****\n";
+	cout << "-------------------------\n";
+
+	cout << "*** C++ Rank ***" << endl;
+	/// find highest cpp score
+	int cpphighest = 0, cppsecondhighest = 0, cppthirdhighest = 0;
+	for (int i = 0; i < arrsize; i++) {
+		if (cpphighest < cpp[i]) {
+			cpphighest = cpp[i];
+		}
+	}
+	int studentnum = 0;
+	for (int i = 0; i < arrsize; i++) {
+		if (cpphighest == cpp[i]) {
+			studentnum++;
+		}
+	}
+	cout << " [ " << cpphighest << " (" << studentnum << " students) ]" << endl;
+	for (int i = 0; i < arrsize; i++) {
+		if (cpphighest == cpp[i]) {
+			int single_digit = 0;
+			if ((id[i] < 10) && (id[i] > 0)) {
+				cout << "    <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+			else if (single_digit == 0) {
+				cout << "   <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+		}
+	}
+	/// find second highest cpp score
+	for (int i = 0; i < arrsize; i++) {
+		if ((cppsecondhighest < cpp[i]) && (cpphighest > cpp[i])) {
+			cppsecondhighest = cpp[i];
+		}
+	}
+	studentnum = 0;
+	for (int i = 0; i < arrsize; i++) {
+		if (cppsecondhighest == cpp[i]) {
+			studentnum++;
+		}
+	}
+	cout << " [ " << cppsecondhighest << " (" << studentnum << " students) ]" << endl;
+	for (int i = 0; i < arrsize; i++) {
+		if (cppsecondhighest == cpp[i]) {
+			int single_digit = 0;
+			if ((id[i] < 10) && (id[i] > 0)){
+				cout << "    <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+			else if (single_digit == 0) {
+				cout << "   <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+		}
+	}
+	/// find third highest cpp score
+	for (int i = 0; i < arrsize; i++) {
+		if ((cppthirdhighest < cpp[i]) && (cppsecondhighest > cpp[i])) {
+			cppthirdhighest = cpp[i];
+		}
+	}
+	studentnum = 0;
+	for (int i = 0; i < arrsize; i++) {
+		if (cppthirdhighest == cpp[i]) {
+			studentnum++;
+		}
+	}
+	cout << " [ " << cppthirdhighest << " (" << studentnum << " students) ]" << endl;
+	for (int i = 0; i < arrsize; i++) {
+		if (cppthirdhighest == cpp[i]) {
+			int single_digit = 0;
+			if ((id[i] < 10) && (id[i] > 0)) {
+				cout << "    <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+			else if (single_digit == 0) {
+				cout << "   <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+		}
+	}
+
+	cout << "\n*** Java Rank ***" << endl;
+	/// find highest java score
+	int javahighest = 0, javasecondhighest = 0, javathirdhighest = 0;
+	for (int i = 0; i < arrsize; i++) {
+		if (javahighest < java[i]) {
+			javahighest = java[i];
+		}
+	}
+	studentnum = 0;
+	for (int i = 0; i < arrsize; i++) {
+		if (javahighest == java[i]) {
+			studentnum++;
+		}
+	}
+	cout << " [ " << javahighest << " (" << studentnum << " students) ]" << endl;
+	for (int i = 0; i < arrsize; i++) {
+		if (javahighest == java[i]) {
+			int single_digit = 0;
+			if ((id[i] < 10) && (id[i] > 0)) {
+				cout << "    <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+			else if (single_digit == 0) {
+				cout << "   <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+		}
+	}
+	/// find second highest java score
+	for (int i = 0; i < arrsize; i++) {
+		if ((javasecondhighest < java[i]) && (javahighest > java[i])) {
+			javasecondhighest = java[i];
+		}
+	}
+	studentnum = 0;
+	for (int i = 0; i < arrsize; i++) {
+		if (javasecondhighest == java[i]) {
+			studentnum++;
+		}
+	}
+	cout << " [ " << javasecondhighest << " (" << studentnum << " students) ]" << endl;
+	for (int i = 0; i < arrsize; i++) {
+		if (javasecondhighest == java[i]) {
+			int single_digit = 0;
+			if ((id[i] < 10) && (id[i] > 0)) {
+				cout << "    <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+			else if (single_digit == 0) {
+				cout << "   <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+		}
+	}
+	/// find third highest java score
+	for (int i = 0; i < arrsize; i++) {
+		if ((javathirdhighest < java[i]) && (javasecondhighest > java[i])) {
+			javathirdhighest = java[i];
+		}
+	}
+	studentnum = 0;
+	for (int i = 0; i < arrsize; i++) {
+		if (javathirdhighest == java[i]) {
+			studentnum++;
+		}
+	}
+	cout << " [ " << javathirdhighest << " (" << studentnum << " students) ]" << endl;
+	for (int i = 0; i < arrsize; i++) {
+		if (javathirdhighest == java[i]) {
+			int single_digit = 0;
+			if ((id[i] < 10) && (id[i] > 0)) {
+				cout << "    <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+			else if (single_digit == 0) {
+				cout << "   <" << id[i] << "> " << setw(10) << name[i] << endl;
+			}
+		}
+	}
+}
+
+void print(int id[], string name[], int java[], int cpp[], int arrsize) {
+	for (int i = 0; i < arrsize; i++) {
+		cout << setw(2) << id[i] << setw(10) << name[i]
+			<< setw(3) << cpp[i] << setw(3) << java[i] << endl;
+	}
 }
