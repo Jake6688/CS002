@@ -1,3 +1,80 @@
+11 Tina
+42 Tammy
+7 Eunice
+8 Delmar
+36 Paul
+12 Rob
+38 Robert 
+36 Paul
+12 Rob
+38 Robert
+14 Katy
+15 Sharleen 
+16 Jaackson
+34 Bobbi
+20 Brianna
+23 Darcey
+13 John
+27 Cyrill
+48 Jake
+43 Edna
+47 Hailey
+30 Jake
+24 Adrian
+55 Sue
+50 Sandy
+17 Amy
+28 Hailey
+3 Lambert
+31 Brian
+45 Ara
+51 Chris
+44 Amy
+54 Oliver
+25 Jessica
+37 Cindy
+1 Adaline
+40 Ruth
+41 John
+35 Alice
+
+23 87 90
+7 66 79
+8 96 90
+11 92 92
+12 78 77
+36 96 82
+54 82 95
+55 93 70
+13 90 92
+14 72 88
+24 79 82
+15 88 87
+1 77 89
+30 90 93
+3 75 77
+17 82 79
+20 71 67
+51 97 91
+44 83 90
+38 70 82
+16 76 82
+41 88 68
+25 86 85
+27 97 92
+47 71 85
+28 74 80
+35 80 75
+43 72 65
+31 96 97 
+34 96 80
+50 69 78 
+48 88 93
+37 86 83
+40 89 78
+42 79 77
+45 77 90
+
 #include <iostream>
 #include <fstream>
 #include<iomanip>
